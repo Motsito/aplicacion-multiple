@@ -2,7 +2,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import React from 'react'
 import { useState } from 'react';
 
-export default function Footer() {
+export default function Contador() {
     const [num, setnum] = useState([24,25]);
     const operadores ={
         'suma' : function(num1, num2){

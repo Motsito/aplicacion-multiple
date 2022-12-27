@@ -4,7 +4,7 @@ import "./Calculadora.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 
-export default function Footer() {
+export default function Calculadora() {
 
     const [operation, setOperation] = useState('');
     const [result, setResult] = useState('');
@@ -31,13 +31,14 @@ export default function Footer() {
 
 
 // Funcion la cual determina los valores de los botones de los numeros del 1 al 9 
-    const createDigits = function(){
+    const createDigits =()=>{
         const digits = []
         for(let i = 1; i < 10; i++){
             digits.push(
-                <button className='box' onClick={()=>{
-                    calculate(i.toString());
-                }}>{i}</button>
+                <button 
+                className='box' 
+                onClick={()=>{calculate(i.toString());}}
+                key={i}>{i}</button>
             )
         }
         return digits;

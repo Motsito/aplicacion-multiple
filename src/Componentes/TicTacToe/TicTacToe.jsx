@@ -3,43 +3,75 @@ import { useState } from 'react';
 import "./TicTacToe.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faX} from '@fortawesome/free-solid-svg-icons'
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-export default function Footer() {
+export default function TicTacToe() {
 
-    const X = <FontAwesomeIcon icon={faX} fontSize="40px" />
-    const circle = <FontAwesomeIcon icon={faCircle} fontSize="40px" />
-    const [XCircle, setCount] = useState(circle);
+//player icon and current player
+const [player, setPlayer] = useState(<FontAwesomeIcon icon={faCircle} />)
+const [current, setcurrent] = useState(true)
+
+// Arrays for each player
+const [xArray, setXArray] = useState('')
+const [circleArray, setCArray] = useState('')
 
 
+//function that decides turns
+const nextPlayer = value=>{
+let valor = value.toString()
+if(current){
+    setCArray(circleArray+value)
+    setPlayer(<FontAwesomeIcon icon={faX} />);
+    setcurrent(false)
+}else{
+    setXArray(xArray+value)
+    setPlayer(<FontAwesomeIcon icon={faCircle} />);
+    setcurrent(true)
+    }
 
+    console.log('vamos bien',circleArray)
+for(let i = 0; i < winninPatterns.length; i++){
+    const [a,b,c] = winninPatterns[i]
+    if(circleArray.includes(a)){
+        console.log('circulo gano')
+    }
+}
+}
+
+
+// Array  that tells What patterns are the winning ones
+const winninPatterns = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
+    [1,4,7],
+    [2,5,8],
+    [3,6,9],
+    [1,5,9],
+    [3,5,7]
+]
+
+//function that generates the spaces for the game
+const newSquares = ()=>{
+    const squares = [];
+    for (let i = 1; i <= 9; i++){
+        squares.push(<button 
+        className="boxes" 
+        onClick={nextPlayer}
+        key={i}
+        > 
+        </button>
+        )
+    }
+    return squares;
+}
 
     return (
-        <div className="back">
-            <div className="dangerWindowZone">
-            <div className="dangerWindow">
-                <div className="topSide">
-                    <button><FontAwesomeIcon icon={faX} fontSize="20px" /></button>
-                </div>
-                <h2>Pick first move</h2>
-                <div className="firstMoveZ">
-                    <div className="firstMoveB">
-                        <button className="buttons" ><FontAwesomeIcon icon={faX} fontSize="90px" /></button>
-                        <button className="buttons" ><FontAwesomeIcon icon={faCircle} fontSize="90px"/></button>
-                    </div>
-                </div>
-            </div>
-            </div>
+        <div className="TicTacToeArea">
             <h1>Tic Tac Toe</h1>
-            <div className="bigOne" >
-                <div className="topLeft boxFlex"><buttom></buttom></div>
-                <div className="top boxFlex"><h1>2</h1></div>
-                <div className="topRight boxFlex"><h1>3</h1></div>
-                <div className="middleLeft boxFlex"><h1>4</h1></div>
-                <div className="middle boxFlex"><h1>5</h1></div>
-                <div className="middleRight boxFlex"><h1>6</h1></div>
-                <div className="bottomLeft boxFlex"><h1>7</h1></div>
-                <div className="bottom boxFlex"><h1>8</h1></div>
-                <div className="bottomRight boxFlex"><h1>9</h1></div>
+            <div className="gridArea" >
+                {newSquares()}
+                {player}
             </div>
         </div>
     )
