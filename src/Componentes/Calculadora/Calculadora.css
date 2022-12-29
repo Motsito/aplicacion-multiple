@@ -1,7 +1,7 @@
 
 .wallpaper{
     background-color: rgb(49, 45, 39);
-    height: 1000px;
+    height: 100vh;
 }
 .calculatorArea{
     width:300px;
@@ -12,9 +12,22 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(216, 226, 226);
+    background-color: rgb(236, 240, 240);
     border: 1px solid black;
     border-radius: 5px;
+}
+.restartB>.box{
+    background-color: rgb(236, 240, 240);
+    border:1px solid;
+    height:43px;
+    width:50px
+}
+.possresult{
+    color:rgb(136, 136, 117)
+}
+.resultZone{
+    padding-left: 2px;
+    width:auto;
 }
 .NandOperatorArea{
     width:1000px;
@@ -24,6 +37,9 @@
     height: 50px;
     display:grid;
     grid-template-columns: auto auto auto auto auto;
+}
+.operatorArea>.box{
+    background-color: rgb(169, 170, 172);
 }
 .numbersArea{
     display:grid;
@@ -36,12 +52,12 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(172, 189, 189);
+    background-color: rgb(93, 134, 167);
     border: 1px solid black;
     border-radius: 5px;
     height: 50px;
 }
 .box:hover{
-    background-color: rgb(117, 156, 156);
+    background-color: rgb(61, 88, 110);
     cursor: pointer;
 }

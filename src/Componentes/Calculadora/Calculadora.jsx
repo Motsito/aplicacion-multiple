@@ -13,8 +13,8 @@ export default function Calculadora() {
 //funcion para establecer el calculo
 const calculate = value=>{
     if  (
-        operators.includes(value) && operators.includes(operation.slice(-1))||
-        operators.includes(value) && operation == ''
+        (operators.includes(value) && operators.includes(operation.slice(-1)))||
+        (operators.includes(value) && operation === '')
         )
     {
         return;
@@ -23,7 +23,6 @@ const calculate = value=>{
         setOperation(operation+value)
                 
         if(!operators.includes(value)){
-            console.log("calcular")
             setResult(eval(operation+value).toString())
         }
     
@@ -57,22 +56,31 @@ const deleteLast = ()=>{
     if (operation === ''){
         return;
     }
-
     const value = operation.slice(0, -1)
-
     setOperation(value)
-
 }
+
+//function restart button
+const restartBtn=()=>{
+    setResult('')
+    setOperation('')
+}
+
 
 return (
     <div className="wallpaper">
         <div className='calculatorArea'>
             <div className='boxWriteZone'>
-                <div>
-                    {!result ?<span>(0)</span>:result}
+                <div className="restartB">
+                    <button className="box" onClick={restartBtn}>C</button>
                 </div>
                 <div>
+                <div className="possresult">
+                    {!result ?<span>(0)</span>:"("+result+")"}
+                </div>
+                <div className="resultZone">
                     {operation || 0}
+                </div>
                 </div>
             </div>
             <div className='NandOperatorArea'>    

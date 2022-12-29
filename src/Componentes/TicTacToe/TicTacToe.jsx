@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect } from 'react';
+import { useState} from 'react';
 import "./TicTacToe.css"
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
@@ -10,13 +10,13 @@ const [player, setPlayer] = useState(Array(9).fill(null))
 const [current, setcurrent] = useState(true)
 const [winner, setWinner] = useState('')
 
-
+//If that tells what to render in the status area
 const Status = ()=>(winner === '' ? (current ? `turno de O` :'turno de X') : `el ganador es ${winner}`)
 
 //function that decides turns
 const nextPlayer = (value)=>{
     // checks if winner have not been decided or if player is already on that spot
-if(winner != ''|| player[value]){
+if(winner !== ''|| player[value]){
     return
 }
 //if current is true, current player is O, and if it is false current will be X
@@ -45,16 +45,24 @@ const winninPatterns = [
 //for el cual revisa cada valor a;adido a las array, y asi encontrar al ganador
     for(let i = 0; i < winninPatterns.length; i++){
         const [a,b,c] = winninPatterns[i];
-        if(player[a] == 'O' && player[a] == player[b] && player[a] == player[c]){
+        if(player[a] === 'O' && player[a] === player[b] && player[a] === player[c]){
             setWinner('O');
             console.log(player[a], player[b],player[c])
             return winner;
-        }else if (player[a] == 'X' && player[a] == player[b] && player[a] == player[c]){
+        }else if (player[a] === 'X' && player[a] === player[b] && player[a] === player[c]){
             console.log(player[a], player[b],player[c])
             setWinner("X");
             return winner;
         }
     }
+}
+
+//function game restart
+
+const restartg = ()=>{
+    setPlayer(Array(9).fill(null))
+    setWinner('')
+    setcurrent(true)
 }
 
 
@@ -80,7 +88,8 @@ const newSquares = ()=>{
             <div className="gridArea" >
                 {newSquares()}
             </div>
-            <h4><Status /></h4> 
+            <h4><Status /></h4>
+            {winner === '' ? '' : (<button class="btn btn-info" onClick={()=>{restartg()}}> Restart </button>)}
         </div>
     )
 }
