@@ -1,8 +1,6 @@
 import React from "react";
 import { useState,useEffect } from 'react';
 import "./TicTacToe.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faX} from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 export default function TicTacToe() {
@@ -11,36 +9,28 @@ export default function TicTacToe() {
 const [player, setPlayer] = useState(Array(9).fill(null))
 const [current, setcurrent] = useState(true)
 const [winner, setWinner] = useState('')
-let wcopy = '';
-console.log(winner,wcopy)
-const Status = ()=>(wcopy === '' ? (current ? `turno de O` :'turno de X') : `el ganador es ${wcopy}`)
 
-// Arrays for each player
-const [xArray, setXArray] = useState('')
-const [circleArray, setCArray] = useState('')
 
+const Status = ()=>(winner === '' ? (current ? `turno de O` :'turno de X') : `el ganador es ${winner}`)
 
 //function that decides turns
 const nextPlayer = (value)=>{
-    console.log("odio a ti puta cosa wea fea", winner)
+    // checks if winner have not been decided or if player is already on that spot
 if(winner != ''|| player[value]){
     return
 }
-let valor = value.toString()
-
+//if current is true, current player is O, and if it is false current will be X
 player[value] = current ? 'O' :'X'
 setPlayer(player)
 
-current ? setCArray(circleArray+value) : setXArray(xArray+value);
-
 setcurrent(!current);
 
-getwinner(player[value]);
+getwinner();
 }
 
 
 //function that gets the winning pattern
-const getwinner= (valor)=>{
+const getwinner= ()=>{
     // Array  that tells What patterns are the winning ones
 const winninPatterns = [
     [1,2,3],
@@ -54,15 +44,15 @@ const winninPatterns = [
 ]
 //for el cual revisa cada valor a;adido a las array, y asi encontrar al ganador
     for(let i = 0; i < winninPatterns.length; i++){
-        const [a,b,c] = winninPatterns[i]
-        if(circleArray.includes(a) && circleArray.includes(b) && circleArray.includes(c)){
-            setWinner('O')
-            console.log('ganador es circulo',winner, a,b,c)
-            return winner
-        }else if (xArray.includes(a) && xArray.includes(b) && xArray.includes(c)){
+        const [a,b,c] = winninPatterns[i];
+        if(player[a] == 'O' && player[a] == player[b] && player[a] == player[c]){
+            setWinner('O');
+            console.log(player[a], player[b],player[c])
+            return winner;
+        }else if (player[a] == 'X' && player[a] == player[b] && player[a] == player[c]){
+            console.log(player[a], player[b],player[c])
             setWinner("X");
-            console.log('ganador es equis')
-            return winner
+            return winner;
         }
     }
 }
